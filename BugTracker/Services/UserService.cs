@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace BugTracker.Services
 {
-    public class UserService
+    public class TrackerService
     {
-        private readonly IMongoCollection<User> _user;
+        private readonly IMongoCollection<Bug> _bug;
         private readonly DeveloperDatabaseConfiguration _settings;
-        public UserService(IOptions<DeveloperDatabaseConfiguration> settings)
+        public TrackerService(IOptions<DeveloperDatabaseConfiguration> settings)
         {
             _settings = settings.Value;
             var client = new MongoClient(_settings.ConnectionString);
             var database = client.GetDatabase(_settings.DatabaseName);
-            _user = database.GetCollection<User>(_settings.CustomerCollectionName);
+            _bug = database.GetCollection<Bug>(_settings.CustomerCollectionName);
         }
-        public async Task<User> AddUser(User user)
+        public async Task<Bug> AddNewBugAsync(Bug bug)
         {
-            await  _user.InsertOneAsync(user);
-            return user; 
+            await  _bug.InsertOneAsync(bug);
+            return bug; 
         }
     }
 }
