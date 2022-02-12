@@ -12,7 +12,8 @@ namespace BugTracker.Models
         {
             Email = email;
             BugTitle = bugTitle;
-            BugDescription = bugDescription; 
+            BugDescription = bugDescription;
+            IsFixed = false; 
         }
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -24,6 +25,7 @@ namespace BugTracker.Models
         [Required]
         public string  BugDescription { get; private set; }
 
+        public bool IsFixed { get; private set; }
 
         public FixPriority Priority { get; private set;  }
     }
