@@ -4,6 +4,7 @@ using BugTracker.Models;
 using BugTracker.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BugTracker.Services
@@ -24,6 +25,16 @@ namespace BugTracker.Services
             var bug = command.ToModel();
             await  _bug.InsertOneAsync(bug);
             return bug; 
+        }
+
+        public async Task<List<Bug>> GetAllAsync()
+        {
+           return await _bug.Find(c => true).ToListAsync();
+        }
+
+        public async Task<Bug> GetByIdAsync(string id)
+        {
+            return await _bug.Find<Bug>(c => c.Id == id).FirstOrDefaultAsync();
         }
     }
 }
