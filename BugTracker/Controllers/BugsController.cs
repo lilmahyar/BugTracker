@@ -25,5 +25,11 @@ namespace BugTracker.Controllers
             await _trackerService.AddNewBugAsync(command);
             return Ok();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllBugsAsync()
+        {
+            var bugs = await _trackerService.GetAllAsync();
+            return Ok(bugs);
+        }
     }
 }
