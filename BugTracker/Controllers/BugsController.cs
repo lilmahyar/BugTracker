@@ -1,4 +1,5 @@
-﻿using BugTracker.Models;
+﻿using BugTracker.Commands;
+using BugTracker.Models;
 using BugTracker.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,9 @@ namespace BugTracker.Controllers
             _trackerService = trackerService; 
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewBug(Bug bug)
+        public async Task<IActionResult> AddNewBug(AddNewBugCommand command)
         {
-            await _trackerService.AddNewBugAsync(bug);
+            await _trackerService.AddNewBugAsync(command);
             return Ok();
         }
     }
